@@ -18,7 +18,7 @@ Este repositorio contiene el desarrollo de la "[Práctica 12 - API Node/Express 
 - Grado en Ingeniería Informática 
 - Tercer año, segundo cuatrimestre
 - Asignatura: Desarrollo en Sistemas Informáticos
-- Fecha de entrega: 10/04/2022
+- Fecha de entrega: 22/05/2022
 
 ## Estructura de directorios
 Este repositorio se ha diseñado de acorde a la [estructura básica de proyecto](https://ull-esit-inf-dsi-2122.github.io/typescript-theory/typescript-project-setup.html) que se ha visto en las distintas clases de la asignatura:
