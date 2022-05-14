@@ -15,11 +15,6 @@ const ArtistSchema = new Schema<ArtistDocumentInterface>({
     required: true,
     trim: true,
   },
-  duration: {
-    type: Number,
-    required: true,
-    trim: true,
-  },
   genre: {
     type: [String],
     required: true,
@@ -50,4 +45,4 @@ const ArtistSchema = new Schema<ArtistDocumentInterface>({
   },
 });
 
-export const Artist: model<ArtistDocumentInterface> = model<ArtistDocumentInterface>('Artist', ArtistSchema);
+export const Artist = model<ArtistDocumentInterface>('Artist', ArtistSchema);
