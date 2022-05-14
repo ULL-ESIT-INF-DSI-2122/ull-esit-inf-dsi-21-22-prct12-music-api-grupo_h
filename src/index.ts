@@ -4,6 +4,11 @@ import {postSongRouter} from './songs/routers/post';
 import {getSongRouter} from './songs/routers/get';
 import {deleteSongRouter} from './songs/routers/delete';
 import {patchSongRouter} from './songs/routers/patch';
+import {postPlaylistRouter} from './playlists/routers/post';
+import {getPlaylistRouter} from './playlists/routers/get';
+import {deletePlaylistRouter} from './playlists/routers/delete';
+import {patchPlaylistRouter} from './playlists/routers/patch';
+
 import {defaultRouter} from './default';
 
 
@@ -13,7 +18,14 @@ app.use(postSongRouter);
 app.use(getSongRouter);
 app.use(deleteSongRouter);
 app.use(patchSongRouter);
+
+app.use(postPlaylistRouter);
+app.use(getPlaylistRouter);
+app.use(deletePlaylistRouter);
+app.use(patchPlaylistRouter);
+
 app.use(defaultRouter);
+
 
 const port = process.env.PORT || 3000;
 
