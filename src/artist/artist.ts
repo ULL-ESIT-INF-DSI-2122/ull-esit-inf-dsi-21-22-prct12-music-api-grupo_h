@@ -2,14 +2,14 @@ import {Document, Schema, model} from 'mongoose';
 import {Genre} from '../genre/genre';
 
 interface ArtistDocumentInterface extends Document {
-  author: string,
+  name: string,
   genre: Genre,
   songs: string[],
   listeners: number
 }
 
 const ArtistSchema = new Schema<ArtistDocumentInterface>({
-  author: {
+  name: {
     type: String,
     unique: true,
     required: true,
@@ -27,10 +27,21 @@ const ArtistSchema = new Schema<ArtistDocumentInterface>({
     enum: ['Rock', 'Heavy Metal', 'Reggaeton', 'Jazz', 'Pop', 'Rap',
       'Hip-hop', 'Trap', 'Urban', 'Latino', 'Bachata', 'Music alternative', 'Electro'],
   },
-  single: {
-    type: Boolean,
+  song: {
+    type: [String],
     required: true,
     trim: true,
+    validate: (value: string[]) => {
+      if (value.length === 0) {
+        throw new Error('El artista no tiene canciones');
+      } else {
+        value.forEach((song) => {
+          if (!song.match(/^[A-Z]/)) {
+            throw new Error('El nombre de la canción debe empezar con mayúscula');
+          }
+        });
+      }
+    },
   },
   reproductions: {
     type: Number,
@@ -39,4 +50,4 @@ const ArtistSchema = new Schema<ArtistDocumentInterface>({
   },
 });
 
-export const Artis = model<ArtistDocumentInterface>('Artist', ArtisSchema);
+export const Artist: model<ArtistDocumentInterface> = model<ArtistDocumentInterface>('Artist', ArtistSchema);

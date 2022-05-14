@@ -1,14 +1,14 @@
 import * as express from 'express';
-import {Song} from '../song';
+import {Artist} from '../artist';
 
-export const postSongRouter = express.Router();
+export const postArtistRouter = express.Router();
 
-postSongRouter.post('/song', (req, res) => {
-  const song = new Song(req.query);
+postArtistRouter.post('/artist', (req, res) => {
+  const Artist = new Artist(req.query);
 
   if (req.query.genre) {
-    song.save().then((song) => {
-      res.status(201).send(song);
+    Artist.save().then((Artist) => {
+      res.status(201).send(Artist);
     }).catch((error) => {
       res.status(400).send(error);
     });

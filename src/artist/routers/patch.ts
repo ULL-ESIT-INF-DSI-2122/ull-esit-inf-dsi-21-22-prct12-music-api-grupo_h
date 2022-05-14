@@ -1,10 +1,10 @@
 import * as express from 'express';
-import {Song} from '../song';
+import {Artist} from '../artist';
 
-export const patchSongRouter = express.Router();
+export const patchArtistRouter = express.Router();
 
-patchSongRouter.patch('/song', (req, res) => {
-  if (!req.query.title) {
+patchArtistRouter.patch('/Artist', (req, res) => {
+  if (!req.query.name) {
     res.status(400).send({
       error: 'A title must be provided',
     });
@@ -18,14 +18,14 @@ patchSongRouter.patch('/song', (req, res) => {
         error: 'Ese atributo no se puede actualizar',
       });
     } else {
-      Song.findOneAndUpdate({title: req.query.title.toString()}, req.query, {
+      Artist.findOneAndUpdate({name: req.query.name.toString()}, req.query, {
         new: true,
         runValidators: true,
-      }).then((song) => {
-        if (!song) {
+      }).then((Artist) => {
+        if (!Artist) {
           res.status(404).send();
         } else {
-          res.send(song);
+          res.send(Artist);
         }
       }).catch((error) => {
         res.status(400).send(error);
@@ -34,7 +34,7 @@ patchSongRouter.patch('/song', (req, res) => {
   }
 });
 
-patchSongRouter.patch('/song/:id', (req, res) => {
+patchArtistRouter.patch('/Artist/:id', (req, res) => {
   const allowedUpdates = ['title', 'reproductions', 'genre'];
   const actualUpdates = Object.keys(req.body);
   const isValidUpdate =
@@ -45,14 +45,14 @@ patchSongRouter.patch('/song/:id', (req, res) => {
       error: 'Ese atributo no se puede actualizar',
     });
   } else {
-    Song.findByIdAndUpdate(req.params.id, req.body, {
+    Artist.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
-    }).then((song) => {
-      if (!song) {
+    }).then((Artist) => {
+      if (!Artist) {
         res.status(404).send();
       } else {
-        res.send(song);
+        res.send(Artist);
       }
     }).catch((error) => {
       res.status(400).send(error);
