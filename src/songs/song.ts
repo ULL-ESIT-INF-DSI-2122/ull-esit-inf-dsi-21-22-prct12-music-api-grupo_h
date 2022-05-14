@@ -16,11 +16,6 @@ const SongSchema = new Schema<SongDocumentInterface>({
     unique: true,
     required: true,
     trim: true,
-    validate: (value: string) => {
-      if (!value.match(/^[A-Z]/)) {
-        throw new Error('El título de la canción debe de empezar por mayúscula');
-      }
-    },
   },
   author: {
     type: String,
@@ -31,6 +26,11 @@ const SongSchema = new Schema<SongDocumentInterface>({
     type: Number,
     required: true,
     trim: true,
+    validate: (value: number) => {
+      if (value <= 0) {
+        throw new Error('A song duration must be greater than zero');
+      }
+    },
   },
   genre: {
     type: [String],
