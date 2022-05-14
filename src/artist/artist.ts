@@ -29,12 +29,12 @@ const ArtistSchema = new Schema<ArtistDocumentInterface>({
     validate: (value: string[]) => {
       if (value.length === 0) {
         throw new Error('El artista no tiene canciones');
-      } else {
-        value.forEach((song) => {
-          if (!song.match(/^[A-Z]/)) {
-            throw new Error('El nombre de la canción debe empezar con mayúscula');
-          }
-        });
+      // } else {
+      //   // value.forEach((song) => {
+      //   //   if (!song.match(/^[A-Z]/)) {
+      //   //     throw new Error('El nombre de la canción debe empezar con mayúscula');
+      //   //   }
+      //   // });
       }
     },
   },
