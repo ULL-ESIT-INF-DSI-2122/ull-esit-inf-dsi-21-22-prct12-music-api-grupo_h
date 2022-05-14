@@ -1,18 +1,18 @@
 import * as express from 'express';
 import './db/mongoose';
-import {postRouter} from './songs/routers/post';
-import {getRouter} from './songs/routers/get';
-import {deleteRouter} from './songs/routers/delete';
-import {patchRouter} from './songs/routers/patch';
+import {postSongRouter} from './songs/routers/post';
+import {getSongRouter} from './songs/routers/get';
+import {deleteSongRouter} from './songs/routers/delete';
+import {patchSongRouter} from './songs/routers/patch';
 import {defaultRouter} from './default';
 
 
 const app = express();
 app.use(express.json());
-app.use(postRouter);
-app.use(getRouter);
-app.use(deleteRouter);
-app.use(patchRouter);
+app.use(postSongRouter);
+app.use(getSongRouter);
+app.use(deleteSongRouter);
+app.use(patchSongRouter);
 app.use(defaultRouter);
 
 const port = process.env.PORT || 3000;

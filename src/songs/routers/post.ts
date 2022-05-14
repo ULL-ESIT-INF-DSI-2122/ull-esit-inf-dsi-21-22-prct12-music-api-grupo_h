@@ -1,9 +1,9 @@
 import * as express from 'express';
 import {Song} from '../song';
 
-export const postRouter = express.Router();
+export const postSongRouter = express.Router();
 
-postRouter.post('/song', (req, res) => {
+postSongRouter.post('/song', (req, res) => {
   const song = new Song(req.query);
 
   if (req.query.genre) {

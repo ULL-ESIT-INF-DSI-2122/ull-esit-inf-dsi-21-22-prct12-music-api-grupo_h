@@ -1,9 +1,9 @@
 import * as express from 'express';
 import {Song} from '../song';
 
-export const patchRouter = express.Router();
+export const patchSongRouter = express.Router();
 
-patchRouter.patch('/song', (req, res) => {
+patchSongRouter.patch('/song', (req, res) => {
   if (!req.query.title) {
     res.status(400).send({
       error: 'A title must be provided',
@@ -34,7 +34,7 @@ patchRouter.patch('/song', (req, res) => {
   }
 });
 
-patchRouter.patch('/song/:id', (req, res) => {
+patchSongRouter.patch('/song/:id', (req, res) => {
   const allowedUpdates = ['title', 'reproductions', 'genre'];
   const actualUpdates = Object.keys(req.body);
   const isValidUpdate =

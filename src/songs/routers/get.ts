@@ -1,9 +1,9 @@
 import * as express from 'express';
 import {Song} from '../song';
 
-export const getRouter = express.Router();
+export const getSongRouter = express.Router();
 
-getRouter.get('/song', (req, res) => {
+getSongRouter.get('/song', (req, res) => {
   const filter = req.query.title?{title: req.query.title.toString()}:{};
 
   Song.find(filter).then((songs) => {
@@ -17,7 +17,7 @@ getRouter.get('/song', (req, res) => {
   });
 });
 
-getRouter.get('/song/:id', (req, res) => {
+getSongRouter.get('/song/:id', (req, res) => {
   Song.findById(req.params.id).then((song) => {
     if (!song) {
       res.status(404).send();

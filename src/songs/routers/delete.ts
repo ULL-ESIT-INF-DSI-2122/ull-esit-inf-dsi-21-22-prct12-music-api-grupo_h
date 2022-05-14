@@ -1,9 +1,9 @@
 import * as express from 'express';
 import {Song} from '../song';
 
-export const deleteRouter = express.Router();
+export const deleteSongRouter = express.Router();
 
-deleteRouter.delete('/song', (req, res) => {
+deleteSongRouter.delete('/song', (req, res) => {
   if (!req.query.title) {
     res.status(400).send({
       error: 'Se debe de introducir el nombre de la canción',
@@ -21,7 +21,7 @@ deleteRouter.delete('/song', (req, res) => {
   }
 });
 
-deleteRouter.delete('/song/:id', (req, res) => {
+deleteSongRouter.delete('/song/:id', (req, res) => {
   Song.findByIdAndDelete(req.params.id).then((song) => {
     if (!song) {
       res.status(404).send();
