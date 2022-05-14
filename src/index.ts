@@ -9,6 +9,11 @@ import {getPlaylistRouter} from './playlists/routers/get';
 import {deletePlaylistRouter} from './playlists/routers/delete';
 import {patchPlaylistRouter} from './playlists/routers/patch';
 
+import {postArtistRouter} from './artist/routers/post';
+import {getArtistRouter} from './artist/routers/get';
+import {deleteArtistRouter} from './artist/routers/delete';
+import {patchArtistRouter} from './artist/routers/patch';
+
 import {defaultRouter} from './default';
 
 
@@ -23,6 +28,11 @@ app.use(postPlaylistRouter);
 app.use(getPlaylistRouter);
 app.use(deletePlaylistRouter);
 app.use(patchPlaylistRouter);
+
+app.use(postArtistRouter);
+app.use(getArtistRouter);
+app.use(deleteArtistRouter);
+app.use(patchArtistRouter);
 
 app.use(defaultRouter);
 
