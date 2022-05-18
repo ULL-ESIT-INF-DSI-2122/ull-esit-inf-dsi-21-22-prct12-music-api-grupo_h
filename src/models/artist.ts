@@ -3,7 +3,7 @@ import {Genre, GenreArray} from './genre';
 
 interface ArtistDocumentInterface extends Document {
   name: string,
-  genre: Genre,
+  genre: Genre[],
   songs: string[],
   monthlyListeners: number
 }

@@ -5,7 +5,7 @@ interface SongDocumentInterface extends Document {
   title: string,
   author: string,
   duration: number,
-  genre: Genre,
+  genre: Genre[],
   single: boolean,
   reproductions: number
 }
