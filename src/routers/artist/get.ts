@@ -6,9 +6,9 @@ export const getArtistRouter = express.Router();
 getArtistRouter.get('/artist', (req, res) => {
   const filter = req.query.name?{name: req.query.name.toString()}:{};
 
-  Artist.find(filter).then((Artist) => {
-    if (Artist.length !== 0) {
-      res.send(Artist);
+  Artist.find(filter).then((artists) => {
+    if (artists.length !== 0) {
+      res.send(artists);
     } else {
       res.status(404).send();
     }
@@ -18,11 +18,11 @@ getArtistRouter.get('/artist', (req, res) => {
 });
 
 getArtistRouter.get('/artist/:id', (req, res) => {
-  Artist.findById(req.params.id).then((Artist) => {
-    if (!Artist) {
+  Artist.findById(req.params.id).then((artist) => {
+    if (!artist) {
       res.status(404).send();
     } else {
-      res.send(Artist);
+      res.send(artist);
     }
   }).catch(() => {
     res.status(500).send();
