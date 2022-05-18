@@ -1,11 +1,11 @@
 import {Document, Schema, model} from 'mongoose';
-import {Genre} from './genre';
+import {Genre, GenreArray} from './genre';
 
 interface ArtistDocumentInterface extends Document {
   name: string,
   genre: Genre,
   songs: string[],
-  listeners: number
+  monthlyListeners: number
 }
 
 const ArtistSchema = new Schema<ArtistDocumentInterface>({
@@ -19,8 +19,13 @@ const ArtistSchema = new Schema<ArtistDocumentInterface>({
     type: [String],
     required: true,
     trim: true,
-    enum: ['Rock', 'Heavy Metal', 'Reggaeton', 'Jazz', 'Pop', 'Rap',
-      'Hip-hop', 'Trap', 'Urban', 'Latino', 'Bachata', 'Music alternative', 'Electro'],
+    validate: (value: string[]) => {
+      if (value.length == 0) {
+        throw new Error('An artist must has at least one genre');
+      } else if (!value.every((genre) => GenreArray.includes(genre))) {
+        throw new Error('Invalid genre');
+      }
+    },
   },
   song: {
     type: [String],
@@ -28,20 +33,21 @@ const ArtistSchema = new Schema<ArtistDocumentInterface>({
     trim: true,
     validate: (value: string[]) => {
       if (value.length === 0) {
-        throw new Error('El artista no tiene canciones');
-      // } else {
-      //   // value.forEach((song) => {
-      //   //   if (!song.match(/^[A-Z]/)) {
-      //   //     throw new Error('El nombre de la canción debe empezar con mayúscula');
-      //   //   }
-      //   // });
+        throw new Error('An artist must has at least one song');
       }
     },
   },
-  reproductions: {
+  monthlyListeners: {
     type: Number,
     required: true,
     trim: true,
+    validate: (value: number) => {
+      if (!Number.isInteger(value)) {
+        throw new Error('Value of monthly listeners must be an integer');
+      } else if (value < 0) {
+        throw new Error('An artist cant has negative monthly listeners');
+      }
+    },
   },
 });
 
