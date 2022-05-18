@@ -42,9 +42,3 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is up on port ${port}`);
 });
-
-
-// run ddbb sudo /home/usuario/mongodb/bin/mongod --dbpath /home/usuario/mongodb-data/
-// en caso de tener el puerto ocupado
-//  1º sudo lsof -t -i:27017
-//  2º sudo kill _numero que nos de lo anterior_
