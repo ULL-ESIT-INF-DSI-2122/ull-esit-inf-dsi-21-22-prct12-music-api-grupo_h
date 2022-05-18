@@ -4,3 +4,9 @@
  */
 export type Genre = 'Rock' | 'Heavy Metal' | 'Reggaeton' | 'Jazz' | 'Pop' | 'Rap' |
   'Hip-hop' | 'Trap' | 'Urban' | 'Latino' | 'Bachata' | 'Music alternative' | 'Electro';
+
+/**
+ * Array que contiene el conjunto de géneros permitidos
+ */
+export const GenreArray = ['Rock', 'Heavy Metal', 'Reggaeton', 'Jazz', 'Pop', 'Rap',
+  'Hip-hop', 'Trap', 'Urban', 'Latino', 'Bachata', 'Music alternative', 'Electro'];

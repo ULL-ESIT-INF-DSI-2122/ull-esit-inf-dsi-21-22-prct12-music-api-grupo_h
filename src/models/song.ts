@@ -1,5 +1,5 @@
 import {Document, Schema, model} from 'mongoose';
-import {Genre} from './genre';
+import {Genre, GenreArray} from './genre';
 
 interface SongDocumentInterface extends Document {
   title: string,
@@ -35,8 +35,11 @@ const SongSchema = new Schema<SongDocumentInterface>({
     type: [String],
     required: true,
     trim: true,
-    enum: ['Rock', 'Heavy Metal', 'Reggaeton', 'Jazz', 'Pop', 'Rap',
-      'Hip-hop', 'Trap', 'Urban', 'Latino', 'Bachata', 'Music alternative', 'Electro'],
+    validate: (value: string[]) => {
+      if (!value.every((genre) => GenreArray.includes(genre))) {
+        throw new Error('Invalid song genre');
+      }
+    },
   },
   single: {
     type: Boolean,
