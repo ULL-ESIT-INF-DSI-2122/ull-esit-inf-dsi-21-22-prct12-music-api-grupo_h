@@ -6,7 +6,7 @@ export const deleteSongRouter = express.Router();
 deleteSongRouter.delete('/song', (req, res) => {
   if (!req.query.title) {
     res.status(400).send({
-      error: 'Se debe de introducir el nombre de la canción',
+      error: 'A title must be provided',
     });
   } else {
     Song.findOneAndDelete({title: req.query.title.toString()}).then((song) => {
@@ -16,7 +16,7 @@ deleteSongRouter.delete('/song', (req, res) => {
         res.send(song);
       }
     }).catch(() => {
-      res.status(400).send();
+      res.status(500).send();
     });
   }
 });
@@ -29,6 +29,6 @@ deleteSongRouter.delete('/song/:id', (req, res) => {
       res.send(song);
     }
   }).catch(() => {
-    res.status(400).send();
+    res.status(500).send();
   });
 });
