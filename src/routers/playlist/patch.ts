@@ -10,15 +10,15 @@ patchPlaylistRouter.patch('/playlist', (req, res) => {
     });
   } else {
     const allowedUpdates = ['name', 'song', 'duration', 'genre'];
-    const actualUpdates = Object.keys(req.query);
+    const actualUpdates = Object.keys(req.body);
     const isValidUpdate =
       actualUpdates.every((update) => allowedUpdates.includes(update));
     if (!isValidUpdate) {
       res.status(400).send({
-        error: 'Ese atributo no se puede actualizar',
+        error: 'Update is not permitted',
       });
     } else {
-      Playlist.findOneAndUpdate({name: req.query.name.toString()}, req.query, {
+      Playlist.findOneAndUpdate({name: req.query.name.toString()}, req.body, {
         new: true,
         runValidators: true,
       }).then((playlist) => {
@@ -28,7 +28,7 @@ patchPlaylistRouter.patch('/playlist', (req, res) => {
           res.send(playlist);
         }
       }).catch((error) => {
-        res.status(400).send(error);
+        res.status(500).send(error);
       });
     }
   }
@@ -42,7 +42,7 @@ patchPlaylistRouter.patch('/playlist/:id', (req, res) => {
 
   if (!isValidUpdate) {
     res.status(400).send({
-      error: 'Ese atributo no se puede actualizar',
+      error: 'Update is not permitted',
     });
   } else {
     Playlist.findByIdAndUpdate(req.params.id, req.body, {
@@ -55,7 +55,7 @@ patchPlaylistRouter.patch('/playlist/:id', (req, res) => {
         res.send(playlist);
       }
     }).catch((error) => {
-      res.status(400).send(error);
+      res.status(500).send(error);
     });
   }
 });
