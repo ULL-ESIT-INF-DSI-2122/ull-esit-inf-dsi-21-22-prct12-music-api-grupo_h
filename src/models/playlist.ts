@@ -1,10 +1,10 @@
 import validator from 'validator';
 import {Document, Schema, model} from 'mongoose';
-import {Genre} from './genre';
+import {Genre, GenreArray} from './genre';
 
 interface PlaylistDocumentInterface extends Document {
   name: string,
-  songs: string[],
+  song: string[],
   duration: number,
   genre: Genre[],
 }
@@ -24,11 +24,15 @@ const PlaylistSchema = new Schema<PlaylistDocumentInterface>({
     type: [String],
     required: true,
     trim: true,
+    validate: (value: string[]) => {
+      if (value.length === 0) {
+        throw new Error('A playlist must has at least one song');
+      }
+    },
   },
   duration: {
     type: Number,
     required: true,
-    trim: true,
     validate: (value: number) => {
       if (value < 0) {
         throw new Error('A playlist duration cant be negative');
@@ -38,9 +42,13 @@ const PlaylistSchema = new Schema<PlaylistDocumentInterface>({
   genre: {
     type: [String],
     required: true,
-    trim: true,
-    enum: ['Rock', 'Heavy Metal', 'Reggaeton', 'Jazz', 'Pop', 'Rap',
-      'Hip-hop', 'Trap', 'Urban', 'Latino', 'Bachata', 'Music alternative', 'Electro'],
+    validate: (value: string[]) => {
+      if (value.length == 0) {
+        throw new Error('A playlist must has at least one genre');
+      } else if (!value.every((genre) => GenreArray.includes(genre))) {
+        throw new Error('Invalid genre');
+      }
+    },
   },
 });
 
