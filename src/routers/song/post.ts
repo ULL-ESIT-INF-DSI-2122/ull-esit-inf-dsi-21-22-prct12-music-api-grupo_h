@@ -3,12 +3,12 @@ import {Song} from '../../models/song';
 
 export const postSongRouter = express.Router();
 
-postSongRouter.post('/song', (req, res) => {
+postSongRouter.post('/song', async (req, res) => {
   const song = new Song(req.body);
-
-  song.save().then((song) => {
-    res.status(201).send(song);
-  }).catch((err) => {
-    res.status(400).send(err);
-  });
+  try {
+    await song.save();
+    return res.status(201).send(song);
+  } catch (error) {
+    return res.status(400).send(error);
+  }
 });

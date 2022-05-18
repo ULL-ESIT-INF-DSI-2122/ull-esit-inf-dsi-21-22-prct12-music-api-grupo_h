@@ -3,59 +3,55 @@ import {Playlist} from '../../models/playlist';
 
 export const patchPlaylistRouter = express.Router();
 
-patchPlaylistRouter.patch('/playlist', (req, res) => {
-  if (!req.query.name) {
-    res.status(400).send({
-      error: 'A name must be provided',
+patchPlaylistRouter.patch('/playlist', async (req, res) => {
+  if (!req.query.title) {
+    return res.status(400).send({
+      error: 'A title must be provided',
     });
-  } else {
-    const allowedUpdates = ['name', 'song', 'duration', 'genre'];
-    const actualUpdates = Object.keys(req.body);
-    const isValidUpdate =
-      actualUpdates.every((update) => allowedUpdates.includes(update));
-    if (!isValidUpdate) {
-      res.status(400).send({
-        error: 'Update is not permitted',
-      });
-    } else {
-      Playlist.findOneAndUpdate({name: req.query.name.toString()}, req.body, {
-        new: true,
-        runValidators: true,
-      }).then((playlist) => {
-        if (!playlist) {
-          res.status(404).send();
-        } else {
-          res.send(playlist);
-        }
-      }).catch((error) => {
-        res.status(500).send(error);
-      });
+  }
+  const allowedUpdates = ['name', 'song', 'duration', 'genre'];
+  const actualUpdates = Object.keys(req.body);
+  const isValidUpdate =
+    actualUpdates.every((update) => allowedUpdates.includes(update));
+  if (!isValidUpdate) {
+    return res.status(400).send({
+      error: 'Update is not permitted',
+    });
+  }
+  try {
+    const playlist = await Playlist.findOneAndUpdate({title: req.query.title.toString()}, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!playlist) {
+      return res.status(404).send();
     }
+    return res.send(playlist);
+  } catch (error) {
+    return res.status(400).send(error);
   }
 });
 
-patchPlaylistRouter.patch('/playlist/:id', (req, res) => {
+patchPlaylistRouter.patch('/playlist/:id', async (req, res) => {
   const allowedUpdates = ['name', 'song', 'duration', 'genre'];
   const actualUpdates = Object.keys(req.body);
   const isValidUpdate =
       actualUpdates.every((update) => allowedUpdates.includes(update));
-
   if (!isValidUpdate) {
-    res.status(400).send({
+    return res.status(400).send({
       error: 'Update is not permitted',
     });
-  } else {
-    Playlist.findByIdAndUpdate(req.params.id, req.body, {
+  }
+  try {
+    const playlist = await Playlist.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
-    }).then((playlist) => {
-      if (!playlist) {
-        res.status(404).send();
-      } else {
-        res.send(playlist);
-      }
-    }).catch((error) => {
-      res.status(500).send(error);
     });
+    if (!playlist) {
+      return res.status(404).send();
+    }
+    return res.send(playlist);
+  } catch (error) {
+    return res.status(400).send(error);
   }
 });

@@ -3,28 +3,27 @@ import {Song} from '../../models/song';
 
 export const getSongRouter = express.Router();
 
-getSongRouter.get('/song', (req, res) => {
+getSongRouter.get('/song', async (req, res) => {
   const filter = req.query.title?{title: req.query.title.toString()}:{};
-
-  Song.find(filter).then((songs) => {
+  try {
+    const songs = await Song.find(filter);
     if (songs.length !== 0) {
-      res.send(songs);
-    } else {
-      res.status(404).send();
+      return res.send(songs);
     }
-  }).catch(() => {
-    res.status(500).send();
-  });
+    return res.status(404).send();
+  } catch (error) {
+    return res.status(500).send();
+  }
 });
 
-getSongRouter.get('/song/:id', (req, res) => {
-  Song.findById(req.params.id).then((song) => {
-    if (!song) {
-      res.status(404).send();
-    } else {
-      res.send(song);
+getSongRouter.get('/song/:id', async (req, res) => {
+  try {
+    const songs = await Song.findById(req.params.id);
+    if (!songs) {
+      return res.status(404).send();
     }
-  }).catch(() => {
-    res.status(500).send();
-  });
+    return res.send(songs);
+  } catch (error) {
+    return res.status(500).send();
+  }
 });

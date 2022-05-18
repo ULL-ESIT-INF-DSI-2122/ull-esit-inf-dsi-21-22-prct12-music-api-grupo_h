@@ -3,11 +3,12 @@ import {Artist} from '../../models/artist';
 
 export const postArtistRouter = express.Router();
 
-postArtistRouter.post('/artist', (req, res) => {
+postArtistRouter.post('/artist', async (req, res) => {
   const artist = new Artist(req.body);
-  artist.save().then((artist) => {
-    res.status(201).send(artist);
-  }).catch((err) => {
-    res.status(400).send(err);
-  });
+  try {
+    await artist.save();
+    return res.status(201).send(artist);
+  } catch (error) {
+    return res.status(400).send(error);
+  }
 });

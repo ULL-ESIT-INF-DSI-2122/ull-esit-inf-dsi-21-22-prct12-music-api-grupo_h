@@ -3,32 +3,31 @@ import {Artist} from '../../models/artist';
 
 export const deleteArtistRouter = express.Router();
 
-deleteArtistRouter.delete('/artist', (req, res) => {
-  if (!req.query.name) {
-    res.status(400).send({
-      error: 'An artist name must be provided',
+deleteArtistRouter.delete('/artist', async (req, res) => {
+  if (!req.query.title) {
+    return res.status(400).send({
+      error: 'A title must be provided',
     });
-  } else {
-    Artist.findOneAndDelete({name: req.query.name.toString()}).then((artist) => {
-      if (!artist) {
-        res.status(404).send();
-      } else {
-        res.send(artist);
-      }
-    }).catch(() => {
-      res.status(500).send();
-    });
+  }
+  try {
+    const artist = await Artist.findOneAndDelete({title: req.query.title.toString()});
+    if (!artist) {
+      return res.status(404).send();
+    }
+    return res.send(artist);
+  } catch (error) {
+    return res.status(400).send();
   }
 });
 
-deleteArtistRouter.delete('/artist/:id', (req, res) => {
-  Artist.findByIdAndDelete(req.params.id).then((artist) => {
+deleteArtistRouter.delete('/artist/:id', async (req, res) => {
+  try {
+    const artist = await Artist.findByIdAndDelete(req.params.id);
     if (!artist) {
-      res.status(404).send();
-    } else {
-      res.send(artist);
+      return res.status(404).send();
     }
-  }).catch(() => {
-    res.status(500).send();
-  });
+    return res.send(artist);
+  } catch (error) {
+    return res.status(400).send();
+  }
 });

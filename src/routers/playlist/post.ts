@@ -3,12 +3,12 @@ import {Playlist} from '../../models/playlist';
 
 export const postPlaylistRouter = express.Router();
 
-postPlaylistRouter.post('/playlist', (req, res) => {
+postPlaylistRouter.post('/playlist', async (req, res) => {
   const playlist = new Playlist(req.body);
-
-  playlist.save().then((playlist) => {
-    res.status(201).send(playlist);
-  }).catch((err) => {
-    res.status(400).send(err);
-  });
+  try {
+    await playlist.save();
+    return res.status(201).send(playlist);
+  } catch (error) {
+    return res.status(400).send(error);
+  }
 });
