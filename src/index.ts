@@ -1,20 +1,20 @@
 import * as express from 'express';
 import './db/mongoose';
-import {postSongRouter} from './songs/routers/post';
-import {getSongRouter} from './songs/routers/get';
-import {deleteSongRouter} from './songs/routers/delete';
-import {patchSongRouter} from './songs/routers/patch';
-import {postPlaylistRouter} from './playlists/routers/post';
-import {getPlaylistRouter} from './playlists/routers/get';
-import {deletePlaylistRouter} from './playlists/routers/delete';
-import {patchPlaylistRouter} from './playlists/routers/patch';
+import {postSongRouter} from './routers/song/post';
+import {getSongRouter} from './routers/song/get';
+import {deleteSongRouter} from './routers/song/delete';
+import {patchSongRouter} from './routers/song/patch';
+import {postPlaylistRouter} from './routers/playlist/post';
+import {getPlaylistRouter} from './routers/playlist/get';
+import {deletePlaylistRouter} from './routers/playlist/delete';
+import {patchPlaylistRouter} from './routers/playlist/patch';
 
-import {postArtistRouter} from './artist/routers/post';
-import {getArtistRouter} from './artist/routers/get';
-import {deleteArtistRouter} from './artist/routers/delete';
-import {patchArtistRouter} from './artist/routers/patch';
+import {postArtistRouter} from './routers/artist/post';
+import {getArtistRouter} from './routers/artist/get';
+import {deleteArtistRouter} from './routers/artist/delete';
+import {patchArtistRouter} from './routers/artist/patch';
 
-import {defaultRouter} from './default';
+import {defaultRouter} from './routers/default';
 
 
 const app = express();

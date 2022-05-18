@@ -1,5 +1,5 @@
 import {Document, Schema, model} from 'mongoose';
-import {Genre} from '../genre/genre';
+import {Genre} from './genre';
 
 interface SongDocumentInterface extends Document {
   title: string,
@@ -13,8 +13,8 @@ interface SongDocumentInterface extends Document {
 const SongSchema = new Schema<SongDocumentInterface>({
   title: {
     type: String,
-    unique: true,
     required: true,
+    unique: true,
     trim: true,
   },
   author: {
@@ -25,7 +25,6 @@ const SongSchema = new Schema<SongDocumentInterface>({
   duration: {
     type: Number,
     required: true,
-    trim: true,
     validate: (value: number) => {
       if (value <= 0) {
         throw new Error('A song duration must be greater than zero');
@@ -42,12 +41,17 @@ const SongSchema = new Schema<SongDocumentInterface>({
   single: {
     type: Boolean,
     required: true,
-    trim: true,
   },
   reproductions: {
     type: Number,
     required: true,
-    trim: true,
+    validate: (value: number) => {
+      if (!Number.isInteger(value)) {
+        throw new Error('Value of song reproductions must be an integer');
+      } else if (value <= 0) {
+        throw new Error('Value of song reproductions must be greater than zero');
+      }
+    },
   },
 });
 

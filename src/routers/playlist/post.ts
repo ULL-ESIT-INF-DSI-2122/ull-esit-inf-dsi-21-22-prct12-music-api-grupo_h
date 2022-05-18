@@ -1,5 +1,5 @@
 import * as express from 'express';
-import {Playlist} from '../playlist';
+import {Playlist} from '../../models/playlist';
 
 export const postPlaylistRouter = express.Router();
 

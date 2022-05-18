@@ -1,5 +1,5 @@
 import * as express from 'express';
-import {Artist} from '../artist';
+import {Artist} from '../../models/artist';
 
 export const postArtistRouter = express.Router();
 

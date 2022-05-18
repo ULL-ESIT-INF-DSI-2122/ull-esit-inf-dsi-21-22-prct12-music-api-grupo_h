@@ -1,5 +1,5 @@
 import {Document, Schema, model} from 'mongoose';
-import {Genre} from '../genre/genre';
+import {Genre} from './genre';
 
 interface ArtistDocumentInterface extends Document {
   name: string,

@@ -1,6 +1,6 @@
 import validator from 'validator';
 import {Document, Schema, model} from 'mongoose';
-import {Genre} from '../genre/genre';
+import {Genre} from './genre';
 
 interface PlaylistDocumentInterface extends Document {
   name: string,

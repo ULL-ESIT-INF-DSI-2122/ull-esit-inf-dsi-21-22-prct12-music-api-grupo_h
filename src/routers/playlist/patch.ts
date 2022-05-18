@@ -1,15 +1,15 @@
 import * as express from 'express';
-import {Song} from '../song';
+import {Playlist} from '../../models/playlist';
 
-export const patchSongRouter = express.Router();
+export const patchPlaylistRouter = express.Router();
 
-patchSongRouter.patch('/song', (req, res) => {
-  if (!req.query.title) {
+patchPlaylistRouter.patch('/playlist', (req, res) => {
+  if (!req.query.name) {
     res.status(400).send({
-      error: 'A title must be provided',
+      error: 'A name must be provided',
     });
   } else {
-    const allowedUpdates = ['title', 'reproductions', 'genre'];
+    const allowedUpdates = ['name', 'song', 'duration', 'genre'];
     const actualUpdates = Object.keys(req.query);
     const isValidUpdate =
       actualUpdates.every((update) => allowedUpdates.includes(update));
@@ -18,14 +18,14 @@ patchSongRouter.patch('/song', (req, res) => {
         error: 'Ese atributo no se puede actualizar',
       });
     } else {
-      Song.findOneAndUpdate({title: req.query.title.toString()}, req.query, {
+      Playlist.findOneAndUpdate({name: req.query.name.toString()}, req.query, {
         new: true,
         runValidators: true,
-      }).then((song) => {
-        if (!song) {
+      }).then((playlist) => {
+        if (!playlist) {
           res.status(404).send();
         } else {
-          res.send(song);
+          res.send(playlist);
         }
       }).catch((error) => {
         res.status(400).send(error);
@@ -34,8 +34,8 @@ patchSongRouter.patch('/song', (req, res) => {
   }
 });
 
-patchSongRouter.patch('/song/:id', (req, res) => {
-  const allowedUpdates = ['title', 'reproductions', 'genre'];
+patchPlaylistRouter.patch('/playlist/:id', (req, res) => {
+  const allowedUpdates = ['name', 'song', 'duration', 'genre'];
   const actualUpdates = Object.keys(req.body);
   const isValidUpdate =
       actualUpdates.every((update) => allowedUpdates.includes(update));
@@ -45,14 +45,14 @@ patchSongRouter.patch('/song/:id', (req, res) => {
       error: 'Ese atributo no se puede actualizar',
     });
   } else {
-    Song.findByIdAndUpdate(req.params.id, req.body, {
+    Playlist.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
-    }).then((song) => {
-      if (!song) {
+    }).then((playlist) => {
+      if (!playlist) {
         res.status(404).send();
       } else {
-        res.send(song);
+        res.send(playlist);
       }
     }).catch((error) => {
       res.status(400).send(error);

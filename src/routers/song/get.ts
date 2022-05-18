@@ -1,5 +1,5 @@
 import * as express from 'express';
-import {Song} from '../song';
+import {Song} from '../../models/song';
 
 export const getSongRouter = express.Router();
 
