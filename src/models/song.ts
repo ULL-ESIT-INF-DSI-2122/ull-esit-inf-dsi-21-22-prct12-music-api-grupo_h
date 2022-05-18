@@ -36,7 +36,9 @@ const SongSchema = new Schema<SongDocumentInterface>({
     required: true,
     trim: true,
     validate: (value: string[]) => {
-      if (!value.every((genre) => GenreArray.includes(genre))) {
+      if (value.length == 0) {
+        throw new Error('A song must has at least one genre');
+      } else if (!value.every((genre) => GenreArray.includes(genre))) {
         throw new Error('Invalid song genre');
       }
     },
