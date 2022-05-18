@@ -9,16 +9,16 @@ patchSongRouter.patch('/song', (req, res) => {
       error: 'A title must be provided',
     });
   } else {
-    const allowedUpdates = ['title', 'reproductions', 'genre'];
-    const actualUpdates = Object.keys(req.query);
+    const allowedUpdates = ['title', 'author', 'duration', 'genre', 'single', 'reproductions'];
+    const actualUpdates = Object.keys(req.body);
     const isValidUpdate =
       actualUpdates.every((update) => allowedUpdates.includes(update));
     if (!isValidUpdate) {
       res.status(400).send({
-        error: 'Ese atributo no se puede actualizar',
+        error: 'Update is not permitted',
       });
     } else {
-      Song.findOneAndUpdate({title: req.query.title.toString()}, req.query, {
+      Song.findOneAndUpdate({title: req.query.title.toString()}, req.body, {
         new: true,
         runValidators: true,
       }).then((song) => {
@@ -28,21 +28,21 @@ patchSongRouter.patch('/song', (req, res) => {
           res.send(song);
         }
       }).catch((error) => {
-        res.status(400).send(error);
+        res.status(500).send(error);
       });
     }
   }
 });
 
 patchSongRouter.patch('/song/:id', (req, res) => {
-  const allowedUpdates = ['title', 'reproductions', 'genre'];
+  const allowedUpdates = ['title', 'author', 'duration', 'genre', 'single', 'reproductions'];
   const actualUpdates = Object.keys(req.body);
   const isValidUpdate =
       actualUpdates.every((update) => allowedUpdates.includes(update));
 
   if (!isValidUpdate) {
     res.status(400).send({
-      error: 'Ese atributo no se puede actualizar',
+      error: 'Update is not permitted',
     });
   } else {
     Song.findByIdAndUpdate(req.params.id, req.body, {
@@ -55,7 +55,7 @@ patchSongRouter.patch('/song/:id', (req, res) => {
         res.send(song);
       }
     }).catch((error) => {
-      res.status(400).send(error);
+      res.status(500).send(error);
     });
   }
 });
