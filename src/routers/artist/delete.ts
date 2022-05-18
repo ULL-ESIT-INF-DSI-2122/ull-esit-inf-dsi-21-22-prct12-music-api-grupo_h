@@ -6,29 +6,29 @@ export const deleteArtistRouter = express.Router();
 deleteArtistRouter.delete('/artist', (req, res) => {
   if (!req.query.name) {
     res.status(400).send({
-      error: 'Se debe de introducir el nombre del artista',
+      error: 'An artist name must be provided',
     });
   } else {
-    Artist.findOneAndDelete({name: req.query.name.toString()}).then((Artists) => {
-      if (!Artists) {
+    Artist.findOneAndDelete({name: req.query.name.toString()}).then((artist) => {
+      if (!artist) {
         res.status(404).send();
       } else {
-        res.send(Artists);
+        res.send(artist);
       }
     }).catch(() => {
-      res.status(400).send();
+      res.status(500).send();
     });
   }
 });
 
 deleteArtistRouter.delete('/artist/:id', (req, res) => {
-  Artist.findByIdAndDelete(req.params.id).then((Artist) => {
-    if (!Artist) {
+  Artist.findByIdAndDelete(req.params.id).then((artist) => {
+    if (!artist) {
       res.status(404).send();
     } else {
-      res.send(Artist);
+      res.send(artist);
     }
   }).catch(() => {
-    res.status(400).send();
+    res.status(500).send();
   });
 });
