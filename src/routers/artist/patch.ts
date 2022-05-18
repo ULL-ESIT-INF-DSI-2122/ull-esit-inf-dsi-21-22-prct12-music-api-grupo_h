@@ -6,56 +6,56 @@ export const patchArtistRouter = express.Router();
 patchArtistRouter.patch('/Artist', (req, res) => {
   if (!req.query.name) {
     res.status(400).send({
-      error: 'A title must be provided',
+      error: 'A name must be provided',
     });
   } else {
-    const allowedUpdates = ['title', 'reproductions', 'genre'];
-    const actualUpdates = Object.keys(req.query);
+    const allowedUpdates = ['name', 'genre', 'song', 'monthlyListeners'];
+    const actualUpdates = Object.keys(req.body);
     const isValidUpdate =
       actualUpdates.every((update) => allowedUpdates.includes(update));
     if (!isValidUpdate) {
       res.status(400).send({
-        error: 'Ese atributo no se puede actualizar',
+        error: 'Update is not permitted',
       });
     } else {
-      Artist.findOneAndUpdate({name: req.query.name.toString()}, req.query, {
+      Artist.findOneAndUpdate({name: req.query.name.toString()}, req.body, {
         new: true,
         runValidators: true,
-      }).then((Artist) => {
-        if (!Artist) {
+      }).then((artist) => {
+        if (!artist) {
           res.status(404).send();
         } else {
-          res.send(Artist);
+          res.send(artist);
         }
       }).catch((error) => {
-        res.status(400).send(error);
+        res.status(500).send(error);
       });
     }
   }
 });
 
 patchArtistRouter.patch('/Artist/:id', (req, res) => {
-  const allowedUpdates = ['title', 'reproductions', 'genre'];
+  const allowedUpdates = ['name', 'genre', 'song', 'monthlyListeners'];
   const actualUpdates = Object.keys(req.body);
   const isValidUpdate =
       actualUpdates.every((update) => allowedUpdates.includes(update));
 
   if (!isValidUpdate) {
     res.status(400).send({
-      error: 'Ese atributo no se puede actualizar',
+      error: 'Update is not permitted',
     });
   } else {
     Artist.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
-    }).then((Artist) => {
-      if (!Artist) {
+    }).then((artist) => {
+      if (!artist) {
         res.status(404).send();
       } else {
-        res.send(Artist);
+        res.send(artist);
       }
     }).catch((error) => {
-      res.status(400).send(error);
+      res.status(500).send(error);
     });
   }
 });
