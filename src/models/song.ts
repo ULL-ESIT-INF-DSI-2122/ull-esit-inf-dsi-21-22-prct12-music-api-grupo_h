@@ -4,7 +4,7 @@ import {Genre, GenreArray} from './genre';
 /**
  * SongDocumentInterface, interfaz para la representación de una canción
  */
-interface SongDocumentInterface extends Document {
+export interface SongDocumentInterface extends Document {
   /**
    * Título de la cancion
    */
@@ -31,7 +31,10 @@ interface SongDocumentInterface extends Document {
   reproductions: number
 }
 
-const SongSchema = new Schema<SongDocumentInterface>({
+/**
+ * Modelo mongoose de una canción
+ */
+export const SongSchema = new Schema<SongDocumentInterface>({
   /**
    * Nombre de la cancion
    */

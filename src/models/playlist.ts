@@ -5,7 +5,7 @@ import {Genre, GenreArray} from './genre';
 /**
  * PlaylistDocumentInterface, interfaz para la representación de una playlist
  */
-interface PlaylistDocumentInterface extends Document {
+export interface PlaylistDocumentInterface extends Document {
   /**
    * Nombre de la playlist
    */
@@ -27,7 +27,7 @@ interface PlaylistDocumentInterface extends Document {
 /**
  * Modelo mongoose de una playlist
  */
-const PlaylistSchema = new Schema<PlaylistDocumentInterface>({
+export const PlaylistSchema = new Schema<PlaylistDocumentInterface>({
   /**
    * Nombre de la playlist
    */

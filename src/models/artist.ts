@@ -4,7 +4,7 @@ import {Genre, GenreArray} from './genre';
 /**
  * ArtistDocumentInterface, interfaz para la representación de un artista
  */
-interface ArtistDocumentInterface extends Document {
+export interface ArtistDocumentInterface extends Document {
   /**
    * Nombre del artista
    */
@@ -26,7 +26,7 @@ interface ArtistDocumentInterface extends Document {
 /**
  * Modelo mongoose de un artista
  */
-const ArtistSchema = new Schema<ArtistDocumentInterface>({
+export const ArtistSchema = new Schema<ArtistDocumentInterface>({
   /**
    * Nombre del artista
    */

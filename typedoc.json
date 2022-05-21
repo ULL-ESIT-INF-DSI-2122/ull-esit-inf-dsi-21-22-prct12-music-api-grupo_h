@@ -1,5 +1,23 @@
 {
   "entryPoints": [
+    "./src/db/mongoose.ts",
+    "./src/models/artist.ts",
+    "./src/models/genre.ts",
+    "./src/models/playlist.ts",
+    "./src/models/song.ts",
+    "./src/routers/artist/get.ts",
+    "./src/routers/artist/post.ts",
+    "./src/routers/artist/patch.ts",
+    "./src/routers/artist/delete.ts",
+    "./src/routers/song/get.ts",
+    "./src/routers/song/post.ts",
+    "./src/routers/song/patch.ts",
+    "./src/routers/song/delete.ts",
+    "./src/routers/playlist/get.ts",
+    "./src/routers/playlist/post.ts",
+    "./src/routers/playlist/patch.ts",
+    "./src/routers/playlist/delete.ts",
+    "./src/index.ts"
   ],
   "out": "./docs"
 }
