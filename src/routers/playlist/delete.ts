@@ -3,6 +3,9 @@ import {Playlist} from '../../models/playlist';
 
 export const deletePlaylistRouter = express.Router();
 
+/**
+ * Elimina una playlist de la base de datos a partir de su nombre
+ */
 deletePlaylistRouter.delete('/playlist', async (req, res) => {
   if (!req.query.title) {
     return res.status(400).send({
@@ -20,6 +23,9 @@ deletePlaylistRouter.delete('/playlist', async (req, res) => {
   }
 });
 
+/**
+ * Elimina una playlist de la base de datos a partir de su id
+ */
 deletePlaylistRouter.delete('/playlist/:id', async (req, res) => {
   try {
     const playlist = await Playlist.findByIdAndDelete(req.params.id);

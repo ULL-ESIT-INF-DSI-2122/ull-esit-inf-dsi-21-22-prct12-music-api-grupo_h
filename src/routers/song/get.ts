@@ -3,6 +3,9 @@ import {Song} from '../../models/song';
 
 export const getSongRouter = express.Router();
 
+/**
+ * Obtiene una canción de la base de datos a partir de su nombre
+ */
 getSongRouter.get('/song', async (req, res) => {
   const filter = req.query.title?{title: req.query.title.toString()}:{};
   try {
@@ -16,6 +19,9 @@ getSongRouter.get('/song', async (req, res) => {
   }
 });
 
+/**
+ * Obtiene una canción de la base de datos a partir de su id
+ */
 getSongRouter.get('/song/:id', async (req, res) => {
   try {
     const songs = await Song.findById(req.params.id);

@@ -3,6 +3,9 @@ import {Artist} from '../../models/artist';
 
 export const postArtistRouter = express.Router();
 
+/**
+ * Crea un artista en la base de datos
+ */
 postArtistRouter.post('/artist', async (req, res) => {
   const artist = new Artist(req.body);
   try {

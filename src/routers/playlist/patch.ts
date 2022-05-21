@@ -3,6 +3,9 @@ import {Playlist} from '../../models/playlist';
 
 export const patchPlaylistRouter = express.Router();
 
+/**
+ * Modifica una playlist de la base de datos a partir de su nombre
+ */
 patchPlaylistRouter.patch('/playlist', async (req, res) => {
   if (!req.query.title) {
     return res.status(400).send({
@@ -32,6 +35,9 @@ patchPlaylistRouter.patch('/playlist', async (req, res) => {
   }
 });
 
+/**
+ * Modifica una playlist de la base de datos a partir de su id
+ */
 patchPlaylistRouter.patch('/playlist/:id', async (req, res) => {
   const allowedUpdates = ['name', 'song', 'duration', 'genre'];
   const actualUpdates = Object.keys(req.body);

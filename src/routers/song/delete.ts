@@ -3,6 +3,9 @@ import {Song} from '../../models/song';
 
 export const deleteSongRouter = express.Router();
 
+/** 
+ * Elimina una canción de la base de datos a partir de su nombre
+*/
 deleteSongRouter.delete('/song', async (req, res) => {
   if (!req.query.title) {
     return res.status(400).send({
@@ -20,6 +23,9 @@ deleteSongRouter.delete('/song', async (req, res) => {
   }
 });
 
+/**
+ * Elimina una canción de la base de datos a partir de su id
+ */
 deleteSongRouter.delete('/song/:id', async (req, res) => {
   try {
     const song = await Song.findByIdAndDelete(req.params.id);

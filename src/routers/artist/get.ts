@@ -3,6 +3,9 @@ import {Artist} from '../../models/artist';
 
 export const getArtistRouter = express.Router();
 
+/**
+ * Obtiene un artista de la base de datos a partir de su nombre
+ */
 getArtistRouter.get('/artist', async (req, res) => {
   const filter = req.query.title?{title: req.query.title.toString()}:{};
   try {
@@ -16,6 +19,9 @@ getArtistRouter.get('/artist', async (req, res) => {
   }
 });
 
+/**
+ * Obtiene un artista de la base de datos a partir de su id
+ */
 getArtistRouter.get('/artist/:id', async (req, res) => {
   try {
     const artists = await Artist.findById(req.params.id);

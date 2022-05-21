@@ -3,6 +3,9 @@ import {Artist} from '../../models/artist';
 
 export const deleteArtistRouter = express.Router();
 
+/**
+ * Elimina un artista de la base de datos a partir de su nombre
+ */
 deleteArtistRouter.delete('/artist', async (req, res) => {
   if (!req.query.title) {
     return res.status(400).send({
@@ -20,6 +23,9 @@ deleteArtistRouter.delete('/artist', async (req, res) => {
   }
 });
 
+/**
+ * Elimina un artista de la base de datos a partir de su id
+ */
 deleteArtistRouter.delete('/artist/:id', async (req, res) => {
   try {
     const artist = await Artist.findByIdAndDelete(req.params.id);

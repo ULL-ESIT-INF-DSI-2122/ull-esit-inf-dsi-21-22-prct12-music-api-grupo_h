@@ -3,6 +3,9 @@ import {Song} from '../../models/song';
 
 export const postSongRouter = express.Router();
 
+/**
+ * Crea una canción en la base de datos
+ */
 postSongRouter.post('/song', async (req, res) => {
   const song = new Song(req.body);
   try {

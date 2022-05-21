@@ -2,14 +2,35 @@ import validator from 'validator';
 import {Document, Schema, model} from 'mongoose';
 import {Genre, GenreArray} from './genre';
 
+/**
+ * PlaylistDocumentInterface, esquema de playlist
+ */
 interface PlaylistDocumentInterface extends Document {
+  /**
+   * Nombre de la playlist
+   */
   name: string,
+  /**
+   * Genero de la playlist
+   */
   song: string[],
+  /**
+   * Canciones de la playlist
+   */
   duration: number,
+  /**
+   * Canciones de la playlist
+   */
   genre: Genre[],
 }
 
+/**
+ * Modelo mongoose de una playlist
+ */
 const PlaylistSchema = new Schema<PlaylistDocumentInterface>({
+  /**
+   * Nombre de la playlist
+   */
   name: {
     type: String,
     trim: true,
@@ -20,6 +41,9 @@ const PlaylistSchema = new Schema<PlaylistDocumentInterface>({
       }
     },
   },
+  /**
+   * Genero de la playlist
+   */
   song: {
     type: [String],
     required: true,
@@ -30,6 +54,9 @@ const PlaylistSchema = new Schema<PlaylistDocumentInterface>({
       }
     },
   },
+  /**
+   * Duración de la playlist
+   */
   duration: {
     type: Number,
     required: true,
@@ -39,6 +66,9 @@ const PlaylistSchema = new Schema<PlaylistDocumentInterface>({
       }
     },
   },
+  /**
+   * Genero de la playlist
+   */
   genre: {
     type: [String],
     required: true,

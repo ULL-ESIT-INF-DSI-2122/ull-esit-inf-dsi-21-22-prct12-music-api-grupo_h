@@ -3,6 +3,9 @@ import {Song} from '../../models/song';
 
 export const patchSongRouter = express.Router();
 
+/**
+ * Actualiza una canción de la base de datos a partir de su nombre
+ */
 patchSongRouter.patch('/song', async (req, res) => {
   if (!req.query.title) {
     return res.status(400).send({
@@ -32,6 +35,9 @@ patchSongRouter.patch('/song', async (req, res) => {
   }
 });
 
+/**
+ * Actualiza una canción de la base de datos a partir de su id
+ */
 patchSongRouter.patch('/song/:id', async (req, res) => {
   const allowedUpdates = ['title', 'author', 'duration', 'genre', 'single', 'reproductions'];
   const actualUpdates = Object.keys(req.body);

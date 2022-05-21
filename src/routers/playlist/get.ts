@@ -3,6 +3,9 @@ import {Playlist} from '../../models/playlist';
 
 export const getPlaylistRouter = express.Router();
 
+/**
+ * Obtiene una playlist de la base de datos a partir de su nombre
+ */
 getPlaylistRouter.get('/playlist', async (req, res) => {
   const filter = req.query.title?{title: req.query.title.toString()}:{};
   try {
@@ -16,6 +19,9 @@ getPlaylistRouter.get('/playlist', async (req, res) => {
   }
 });
 
+/**
+ * Obtiene una playlist de la base de datos a partir de su id
+ */
 getPlaylistRouter.get('/playlist/:id', async (req, res) => {
   try {
     const playlists = await Playlist.findById(req.params.id);
