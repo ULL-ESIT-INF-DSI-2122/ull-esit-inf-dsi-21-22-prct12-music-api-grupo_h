@@ -3,23 +3,23 @@ import {Document, Schema, model} from 'mongoose';
 import {Genre, GenreArray} from './genre';
 
 /**
- * PlaylistDocumentInterface, esquema de playlist
+ * PlaylistDocumentInterface, interfaz para la representación de una playlist
  */
 interface PlaylistDocumentInterface extends Document {
   /**
    * Nombre de la playlist
    */
-  name: string,
+  name: string | 'New Playlist',
   /**
-   * Genero de la playlist
+   * Cancion/s de la playlist
    */
   song: string[],
   /**
-   * Canciones de la playlist
+   * Duración (en segundos) de la playlist
    */
   duration: number,
   /**
-   * Canciones de la playlist
+   * Genero/s de la playlist
    */
   genre: Genre[],
 }
@@ -42,7 +42,7 @@ const PlaylistSchema = new Schema<PlaylistDocumentInterface>({
     },
   },
   /**
-   * Genero de la playlist
+   * Cancion/es de la playlist
    */
   song: {
     type: [String],
@@ -55,7 +55,7 @@ const PlaylistSchema = new Schema<PlaylistDocumentInterface>({
     },
   },
   /**
-   * Duración de la playlist
+   * Duración (en segundos) de la playlist
    */
   duration: {
     type: Number,
@@ -67,7 +67,7 @@ const PlaylistSchema = new Schema<PlaylistDocumentInterface>({
     },
   },
   /**
-   * Genero de la playlist
+   * Genero/s de la playlist
    */
   genre: {
     type: [String],

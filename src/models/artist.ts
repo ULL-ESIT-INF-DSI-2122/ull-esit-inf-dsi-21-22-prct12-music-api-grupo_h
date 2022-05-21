@@ -2,7 +2,7 @@ import {Document, Schema, model} from 'mongoose';
 import {Genre, GenreArray} from './genre';
 
 /**
- * Artist schema, esquema de artistas
+ * ArtistDocumentInterface, interfaz para la representación de un artista
  */
 interface ArtistDocumentInterface extends Document {
   /**
@@ -10,15 +10,15 @@ interface ArtistDocumentInterface extends Document {
    */
   name: string,
   /**
-   * Genero del artista
+   * Genero/s del artista
    */
   genre: Genre[],
   /**
-   * Canciones del artista
+   * Cancion/es del artista
    */
   song: string[],
   /**
-   * Oyentes mesuales del artista
+   * Número de oyentes mesuales del artista
    */
   monthlyListeners: number
 }
@@ -37,7 +37,7 @@ const ArtistSchema = new Schema<ArtistDocumentInterface>({
     trim: true,
   },
   /**
-   * Genero del artista
+   * Genero/s del artista
    */
   genre: {
     type: [String],
@@ -52,7 +52,7 @@ const ArtistSchema = new Schema<ArtistDocumentInterface>({
     },
   },
   /**
-   * Canciones del artista
+   * Cancion/es del artista
    */
   song: {
     type: [String],
@@ -65,7 +65,7 @@ const ArtistSchema = new Schema<ArtistDocumentInterface>({
     },
   },
   /**
-   * Oyentes mesuales del artista
+   * Número de oyentes mesuales del artista
    */
   monthlyListeners: {
     type: Number,

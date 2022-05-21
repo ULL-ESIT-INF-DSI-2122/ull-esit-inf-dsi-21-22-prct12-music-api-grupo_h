@@ -2,11 +2,11 @@ import {Document, Schema, model} from 'mongoose';
 import {Genre, GenreArray} from './genre';
 
 /**
- * SongDocumentInterface, esquema de cancion
+ * SongDocumentInterface, interfaz para la representación de una canción
  */
 interface SongDocumentInterface extends Document {
   /**
-   * Nombre de la cancion
+   * Título de la cancion
    */
   title: string,
   /**
@@ -14,15 +14,15 @@ interface SongDocumentInterface extends Document {
    */
   author: string,
   /**
-   * Duracion de la cancion
+   * Duracion (en segundos) de la cancion
    */
   duration: number,
   /**
-   * Genero de la cancion
+   * Genero/s de la cancion
    */
   genre: Genre[],
   /**
-   * Comprobar si la cancion es un single
+   * Determina si la cancion es un single
    */
   single: boolean,
   /**
@@ -50,7 +50,7 @@ const SongSchema = new Schema<SongDocumentInterface>({
     trim: true,
   },
   /**
-   * Duracion de la cancion
+   * Duracion (en segundos) de la cancion
    */
   duration: {
     type: Number,
@@ -62,7 +62,7 @@ const SongSchema = new Schema<SongDocumentInterface>({
     },
   },
   /**
-   * Genero de la cancion
+   * Genero/s de la cancion
    */
   genre: {
     type: [String],
@@ -77,7 +77,7 @@ const SongSchema = new Schema<SongDocumentInterface>({
     },
   },
   /**
-   * Comprobar si la cancion es un single
+   * Determina si la cancion es un single
    */
   single: {
     type: Boolean,
