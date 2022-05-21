@@ -292,3 +292,30 @@ export const Song = model<SongDocumentInterface>('Song', SongSchema);
 
 ```	
 
+## Routes
+### artist
+Encontramos los metodos delete, get, post y patch de un artista
+
+#### delete
+Se encarga de eliminar un artista de la base de datos, llamado al metodo delete de mongoose.
+
+Posee dos llamadas al metodo delete, una que se encarga de eliminar al artista a partir del nombre de este ya que como se comento anteriormente el nombre de un antista es unico. Primero comprobamos que se introduzca el nombre del artista, en caso contrario se devuelve un estado 400 y se indica que se debe introducir un nombre de artista. Leugo se comprueba que le nombre del artista no exista, si se comple se envia el artista y en caso constrario se devuelve en 404. En caso deque se produzca algun error se devuelve un estado 400.
+
+```typescript
+deleteArtistRouter.delete('/artist', async (req, res) => {
+  if (!req.query.title) {
+    return res.status(400).send({
+      error: 'A title must be provided',
+    });
+  }
+  try {
+    const artist = await Artist.findOneAndDelete({title: req.query.title.toString()});
+    if (!artist) {
+      return res.status(404).send();
+    }
+    return res.send(artist);
+  } catch (error) {
+    return res.status(400).send();
+  }
+});
+```
