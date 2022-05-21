@@ -7,9 +7,9 @@ export const patchArtistRouter = express.Router();
  * Actualiza un artista de la base de datos a partir de su nombre
  */
 patchArtistRouter.patch('/artist', async (req, res) => {
-  if (!req.query.title) {
+  if (!req.query.name) {
     return res.status(400).send({
-      error: 'A title must be provided',
+      error: 'A name must be provided',
     });
   }
   const allowedUpdates = ['name', 'genre', 'song', 'monthlyListeners'];
@@ -22,7 +22,7 @@ patchArtistRouter.patch('/artist', async (req, res) => {
     });
   }
   try {
-    const artist = await Artist.findOneAndUpdate({title: req.query.title.toString()}, req.body, {
+    const artist = await Artist.findOneAndUpdate({name: req.query.name.toString()}, req.body, {
       new: true,
       runValidators: true,
     });

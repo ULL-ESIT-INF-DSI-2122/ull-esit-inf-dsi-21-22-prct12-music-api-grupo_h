@@ -7,7 +7,7 @@ export const getPlaylistRouter = express.Router();
  * Obtiene una playlist de la base de datos a partir de su nombre
  */
 getPlaylistRouter.get('/playlist', async (req, res) => {
-  const filter = req.query.title?{title: req.query.title.toString()}:{};
+  const filter = req.query.name?{name: req.query.name.toString()}:{};
   try {
     const playlists = await Playlist.find(filter);
     if (playlists.length !== 0) {

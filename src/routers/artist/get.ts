@@ -7,7 +7,7 @@ export const getArtistRouter = express.Router();
  * Obtiene un artista de la base de datos a partir de su nombre
  */
 getArtistRouter.get('/artist', async (req, res) => {
-  const filter = req.query.title?{title: req.query.title.toString()}:{};
+  const filter = req.query.name?{name: req.query.name.toString()}:{};
   try {
     const artists = await Artist.find(filter);
     if (artists.length !== 0) {

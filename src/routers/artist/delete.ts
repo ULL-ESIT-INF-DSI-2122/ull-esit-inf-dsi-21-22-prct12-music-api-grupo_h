@@ -7,13 +7,13 @@ export const deleteArtistRouter = express.Router();
  * Elimina un artista de la base de datos a partir de su nombre
  */
 deleteArtistRouter.delete('/artist', async (req, res) => {
-  if (!req.query.title) {
+  if (!req.query.name) {
     return res.status(400).send({
-      error: 'A title must be provided',
+      error: 'A name must be provided',
     });
   }
   try {
-    const artist = await Artist.findOneAndDelete({title: req.query.title.toString()});
+    const artist = await Artist.findOneAndDelete({name: req.query.name.toString()});
     if (!artist) {
       return res.status(404).send();
     }
