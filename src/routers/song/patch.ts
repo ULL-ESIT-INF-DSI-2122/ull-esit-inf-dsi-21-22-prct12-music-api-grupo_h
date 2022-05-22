@@ -12,6 +12,9 @@ patchSongRouter.patch('/song', async (req, res) => {
       error: 'A title must be provided',
     });
   }
+  if (Object.keys(req.body).length === 0) {
+    return res.status(400).send({error: 'Request body cant be empty'});
+  }
   const allowedUpdates = ['title', 'author', 'duration', 'genre', 'single', 'reproductions'];
   const actualUpdates = Object.keys(req.body);
   const isValidUpdate =
@@ -39,6 +42,9 @@ patchSongRouter.patch('/song', async (req, res) => {
  * Actualiza una canción de la base de datos a partir de su id
  */
 patchSongRouter.patch('/song/:id', async (req, res) => {
+  if (Object.keys(req.body).length === 0) {
+    return res.status(400).send({error: 'Request body cant be empty'});
+  }
   const allowedUpdates = ['title', 'author', 'duration', 'genre', 'single', 'reproductions'];
   const actualUpdates = Object.keys(req.body);
   const isValidUpdate =

@@ -12,6 +12,9 @@ patchArtistRouter.patch('/artist', async (req, res) => {
       error: 'A name must be provided',
     });
   }
+  if (Object.keys(req.body).length === 0) {
+    return res.status(400).send({error: 'Request body cant be empty'});
+  }
   const allowedUpdates = ['name', 'genre', 'song', 'monthlyListeners'];
   const actualUpdates = Object.keys(req.body);
   const isValidUpdate =
@@ -39,6 +42,9 @@ patchArtistRouter.patch('/artist', async (req, res) => {
  * Actualiza un artista de la base de datos a partir de su id
  */
 patchArtistRouter.patch('/artist/:id', async (req, res) => {
+  if (Object.keys(req.body).length === 0) {
+    return res.status(400).send({error: 'Request body cant be empty'});
+  }
   const allowedUpdates = ['name', 'genre', 'song', 'monthlyListeners'];
   const actualUpdates = Object.keys(req.body);
   const isValidUpdate =
