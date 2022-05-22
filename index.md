@@ -14,12 +14,12 @@
 - Fecha de entrega: 22/05/2022
 
 ## Índice 
-- [Introducción](#Introduccion)
-- [Database](#Database)
-- [Models](#Models)
-- [Routers](#Routers)
-- [Index.ts](#Index.ts)
-- [Referencias](#Referencias)
+- [Introducción](#introduccion)
+- [Database](#database)
+- [Models](#models)
+- [Routers](#routers)
+- [Index.ts](#index.ts)
+- [Referencias](#referencias)
 
 
 ## Introducción
