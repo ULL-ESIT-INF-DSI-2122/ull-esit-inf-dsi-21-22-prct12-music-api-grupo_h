@@ -18,7 +18,7 @@
 - [Database](#database)
 - [Models](#models)
 - [Routers](#routers)
-- [Index.ts](#index.ts)
+- [Index](#index)
 - [Referencias](#referencias)
 
 
@@ -790,7 +790,7 @@ defaultRouter.all('*', (_, res) => {
 });
 ```
 
-## Index.ts
+## Index
 En cuanto a la creación del servidor, se usa `express()`, el cual devuelve un objeto `Express`. Además indicamos el uso de los routers creados anteriormente e indicamos que las peticiones se parseen en formato JSON, pudiendo acceder directamente a las propiedades sin el uso de `JSON.parse`. Por útlimo, se crea la constante `port`, la cual puede obtener el valor de la variable de entorno `process.env.PORT` si existe, de lo contrario, está poseerá el valor `3000`. Para poder recibir las peticiones, indicamos al servidor que se ponga a escuchar en el puerto cuyo valor es el de la variable `PORT`.
 
 ```typescript
