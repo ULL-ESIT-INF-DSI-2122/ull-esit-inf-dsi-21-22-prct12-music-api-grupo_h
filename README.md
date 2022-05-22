@@ -4,7 +4,7 @@ Este repositorio contiene el desarrollo de la "[Práctica 12 - API Node/Express 
 ## Integrantes
 - Jacob Santana Rodríguez (alu0101330426@ull.edu.es)
 - Ana Virginia Giambona Díaz (alu0101322650@ull.edu.es)
-- Hector Rodríguez Alonso (alu0101365107@ull.edu.es)
+- Héctor Rodríguez Alonso (alu0101365107@ull.edu.es)
 - Adrián González Galván (alu0101321219@ull.edu.es)
 ## Datos generales
 - Universidad de La Laguna
